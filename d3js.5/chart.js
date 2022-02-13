@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function draw() {
     // Data
     const dataset = await d3.json(
-      "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json",
-      (data) => data
+      "https://www.educative.io/udata/1kL2GBJw8VB/data-4-1.json",
+      (d) => d.data
     );
     const year = dataset.data.map((data) => +data[0].slice(0, 4));
     const rate = dataset.data.map((data) => data[1]);
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const xYear = [...year];
     const yRate = [...rate];
 
-    console.log(Math.floor(xYear.length / 20));
+    console.log(dataset);
     // Dimensions
     let dimensions = {
       width: 800,
