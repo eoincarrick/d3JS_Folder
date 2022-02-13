@@ -2,7 +2,7 @@
   border: 0.01rem solid black;
 }
 
-.circleContainer:hover,
+.rectContainer:hover,
 .rectContainer:hover {
   fill: #ff7300;
 }

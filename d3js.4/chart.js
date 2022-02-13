@@ -41,7 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
-  const rect = svg
+  const g = svg.select("g").attr("transform", `translate(50,50)`).append("g");
+
+  const rect = g
     .selectAll("rect")
     .data(dataset)
     .enter()
