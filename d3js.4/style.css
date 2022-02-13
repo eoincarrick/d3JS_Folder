@@ -1,0 +1,11 @@
+.svgContainer {
+  border: 0.01rem solid black;
+}
+
+.rectContainer:hover {
+  fill: #ff7300;
+}
+
+.txtLabel {
+  font-size: 10px;
+}

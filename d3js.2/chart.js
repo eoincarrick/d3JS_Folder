@@ -16,12 +16,12 @@ const svg = d3
 
 const yScale = d3
   .scaleLinear()
-  .domain([0, d3.max(dataset)])
+  .domain([d3.min(dataset), d3.max(dataset)])
   .range([0, svgHeight]);
 
 const xScale = d3
   .scaleLinear()
-  .domain([0, d3.max(dataset)])
+  .domain([d3.min(dataset), d3.max(dataset)])
   .range([0, svgWidth]);
 
 const xAxis = d3.axisBottom().scale(xScale);
