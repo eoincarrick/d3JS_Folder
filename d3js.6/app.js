@@ -27489,7 +27489,7 @@ const xScale = d3
 const yScale = d3
   .scaleLinear()
   .domain(d3.extent(dataset, yAccessor))
-  .rangeRound([ dimensions.ctrHeight,0])
+  .rangeRound([dimensions.ctrHeight, 0])
   .nice()
   .clamp(true);
 
