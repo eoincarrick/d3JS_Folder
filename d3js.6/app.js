@@ -27489,7 +27489,7 @@ const xScale = d3
 const yScale = d3
   .scaleLinear()
   .domain(d3.extent(dataset, yAccessor))
-  .rangeRound([0, dimensions.ctrHeight])
+  .rangeRound([ dimensions.ctrHeight,0])
   .nice()
   .clamp(true);
 
@@ -27500,10 +27500,14 @@ ctr
   .join("circle")
   .attr("cx", (d) => xScale(xAccessor(d)))
   .attr("cy", (d) => yScale(yAccessor(d)))
+  .attr("data-temp", yAccessor)
   .attr("r", 5)
   .attr("fill", "red");
 
-const xAxis = d3.axisBottom(xScale);
+const xAxis = d3
+  .axisBottom(xScale)
+  .ticks(5)
+  .tickFormat((d) => d * 100 + "%");
 const yAxis = d3.axisLeft(yScale);
 
 const xAxisGroup = ctr
@@ -27511,10 +27515,7 @@ const xAxisGroup = ctr
   .call(xAxis)
   .style("transform", `translateY(${dimensions.ctrHeight}px)`);
 
-const yAxisGruop = ctr
-  .append("g")
-  .call(yAxis)
-  .classed("axis", true)
+const yAxisGroup = ctr.append("g").call(yAxis).classed("axis", true);
 
 xAxisGroup
   .append("text")
@@ -27525,10 +27526,11 @@ xAxisGroup
   .style("text-anchor", "middle")
   .classed("axis", true);
 
-  yAxisGroup.append("text")
+yAxisGroup
+  .append("text")
   .attr("x", -dimensions.ctrHeight / 2)
   .attr("y", -dimensions.margin.left + 15)
   .attr("fill", "black")
-  .text("Temperature (&deg;F)")
+  .html("Temperature (&deg;F)")
   .style("transform", "rotate(270deg)")
-  .style("text-anchor", "middle")
+  .style("text-anchor", "middle");
