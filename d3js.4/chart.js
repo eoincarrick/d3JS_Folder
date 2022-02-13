@@ -63,15 +63,23 @@ document.addEventListener("DOMContentLoaded", () => {
   //     .attr("y", (d) => svgHeight - d)
   //     .text((d) => d);
 
+  //   const jsonD3 = d3.json(
+  //     "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json",
+  //     (data) => console.log(data.data)
+  //   );
+
+  //   console.log(jsonD3);
+
   const circle = svg
     .selectAll("circle")
     .data(dataset)
     .enter()
     .append("circle")
+    .attr("class", "circleContainer")
     .attr("width", 20)
     .attr("height", 20)
     .attr("r", 4)
-    .attr("cx", (d, i) => i * 5)
+    .attr("cx", (d, i) => i * 5 + 2)
     .attr("cy", (d, i) => svgHeight - d)
-    .attr("fill", "navy");
+    .attr("fill", "#553013");
 });
