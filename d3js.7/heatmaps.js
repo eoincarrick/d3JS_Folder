@@ -1,3 +1,4 @@
+//          (  HTML,String)
 const draw = (el, scale) => {
   const dataset = [
     11002, 29017, 45793, 7000, 120040, 30138, 21699, 47058, 24001, 6000, 69007,
@@ -12,14 +13,16 @@ const draw = (el, scale) => {
     80130, 20000, 9500, 1968,
   ];
 
+  //Sorting our dataset from the lowest to the height value.
   dataset.sort((a, b) => a - b);
 
-  // Dimensions
+  // Dimensions of the image
   let dimensions = {
     width: 600,
     height: 150,
   };
 
+  //Setting the color for the image, by using conditional statement.
   let colorScale;
 
   if (scale === "linear") {
@@ -43,14 +46,18 @@ const draw = (el, scale) => {
       .range(d3.schemeReds[3]);
   }
 
+  //The size of each box in the svg container
   const box = 30;
+
   // Draw Image
+  // And setting the width and height of the svg container
   const svg = d3
     .select(el)
     .append("svg")
     .attr("width", dimensions.width)
     .attr("height", dimensions.height);
 
+  //Appending the <g> element inside the svg container. At the same time, setting the box width and height, and color.
   svg
     .append("g")
     .attr("stroke", "black")
@@ -64,6 +71,8 @@ const draw = (el, scale) => {
     .attr("y", (d, i) => box * ((i / 20) | 0))
     .attr("fill", (d) => colorScale(d));
 };
+
+//    HTML id    string
 draw("#heatmap1", "linear");
 draw("#heatmap2", "quantize");
 draw("#heatmap3", "quantile");
