@@ -27479,12 +27479,16 @@ const ctr = svg
     `translate(${dimensions.margin.left}, ${dimensions.margin.top})`
   );
 
+const tooltip = d3.select("#tooltip");
+
 // Scales
 const xScale = d3
   .scaleLinear()
   .domain(d3.extent(dataset, xAccessor))
   .rangeRound([0, dimensions.ctrWidth])
   .clamp(true);
+
+console.log(xScale);
 
 const yScale = d3
   .scaleLinear()
@@ -27502,7 +27506,34 @@ ctr
   .attr("cy", (d) => yScale(yAccessor(d)))
   .attr("data-temp", yAccessor)
   .attr("r", 5)
-  .attr("fill", "red");
+  .attr("fill", "red")
+  .on("mouseenter", function (e, datum) {
+    d3.select(this).attr("fill", "#120078").attr("r", 8);
+
+    tooltip
+      .style("display", "block")
+      .style("top", yScale(yAccessor(datum)) - 25 + "px")
+      .style("left", xScale(xAccessor(datum)) + "px");
+  })
+  .on("mouseenter", function (e, datum) {
+    d3.select(this).attr("fill", "#120078").attr("r", 8);
+
+    tooltip
+      .style("display", "block")
+      .style("top", yScale(yAccessor(datum)) - 25 + "px")
+      .style("left", xScale(xAccessor(datum)) + "px");
+
+    tooltip.select(".metric-humidity span").text(xAccessor(datum));
+
+    tooltip.select(".metric-temp span").text(yAccessor(datum));
+
+    tooltip.select(".metric-date").text(datum.currently.time);
+  })
+  .on("mouseleave", function (e, datum) {
+    d3.select(this).attr("fill", "red").attr("r", 5);
+
+    tooltip.style("display", "none");
+  });
 
 const xAxis = d3
   .axisBottom(xScale)

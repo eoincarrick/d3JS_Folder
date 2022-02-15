@@ -9,7 +9,6 @@ const marginBottom = 30;
 
 const svg = d3
   .select("svg")
-  .data(dataset)
   .attr("width", svgWidth)
   .attr("height", svgHeight)
   .attr("class", "svgContainer");

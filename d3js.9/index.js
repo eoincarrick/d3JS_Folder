@@ -27446,6 +27446,9 @@ const dataset = [
   },
 ];
 
+const xAccessor = dataset.map((d) => d.currently.humidity);
+console.log(xAccessor);
+
 // Dimensions
 let dimensions = {
   width: 800,
@@ -27466,3 +27469,22 @@ const svg = d3
 const ctr = svg
   .append("g") // <g>
   .attr("transform", `translate(${dimensions.margins}, ${dimensions.margins})`);
+
+// Scales
+const xScale = d3
+  .scaleLinear()
+  .domain(d3.extent(dataset, xAccessor))
+  .range([0, dimensions.ctrWidth])
+  .nice();
+
+// Draw Bars
+ctr
+  .selectAll("rect")
+  .data(dataset)
+  .join("rect")
+  .attr("width", 5)
+  .attr("height", 100)
+  .attr("x", (d) => xScale(xAccessor(d)))
+  .attr("y", 0);
+
+  const bin = d3.bin().domain(xScale.domain()).value(xAccessor).thresholds(10);
