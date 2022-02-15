@@ -74,7 +74,7 @@ circleGroup
   .join("circle")
   .attr("r", "6")
   .attr("cx", dimensions.margin)
-  .attr("cy", (d) => universeScale(sizeAccessor*d));
+  .attr("cy", (d) => universeScale(sizeAccessor(d)));
 
 // Draw Labels
 circleGroup
@@ -82,7 +82,7 @@ circleGroup
   .data(dataset)
   .join("text")
   .attr("x", dimensions.margin + 15)
-  .attr("y", (d) => universeScale(sizeAccessor*d))
+  .attr("y", (d) => universeScale(sizeAccessor(d)))
   .text(nameAccessor);
 
 // // Draw Axis
