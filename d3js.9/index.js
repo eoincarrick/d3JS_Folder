@@ -27446,7 +27446,7 @@ const dataset = [
   },
 ];
 
-const xAccessor = dataset.map((d) => d.currently.humidity);
+const xAccessor = (d) => d.currently.humidity;
 console.log(xAccessor);
 
 // Dimensions
